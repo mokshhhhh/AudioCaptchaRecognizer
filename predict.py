@@ -38,7 +38,7 @@ class CRNN(nn.Module):
 
 # Load trained CRNN model
 crnn_model = CRNN().to(device)
-crnn_model.load_state_dict(torch.load('model_checkpoint_epoch_4.pth'))
+crnn_model.load_state_dict(torch.load('model_checkpoint_epoch_10.pth'))
 crnn_model.eval()
 
 # Load and preprocess audio with noise reduction
@@ -73,7 +73,13 @@ def extract_text_from_image(image_path):
     text = pytesseract.image_to_string(binary, config="--psm 7")
 
     # Normalize text: remove spaces and convert to uppercase
-    return text.strip()
+    clean_text = text.strip().replace(" ", "").upper()
+
+    # Add "CAPITAL " before each character
+    expanded_text = ' '.join([f"CAPITAL {char}" for char in clean_text])
+
+    return expanded_text
+
 
 # Predict function
 def predict(audio_file, image_file):
