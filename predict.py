@@ -9,7 +9,6 @@ import torch.nn.functional as F
 import torch.nn as nn
 from Levenshtein import ratio  # For better accuracy calculation
 from transformers import Wav2Vec2ProcessorWithLM
-# filepath: c:\Users\Moksh Dhiman\OneDrive\Desktop\audio-captcha-solver-main\predict.py
 import pytesseract
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
@@ -61,8 +60,6 @@ def transcribe_audio(file_path):
     predicted_ids = torch.argmax(logits, dim=-1)
     transcription = processor.batch_decode(predicted_ids)[0]
     
-    # Only keep alphanumeric characters (remove words like 'SMALL', 'CAPITAL')
-   
     return transcription.strip()
 
 # Extract text from image using OCR

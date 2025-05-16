@@ -20,10 +20,9 @@ pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tessera
 
 
 # Load Wav2Vec2 model
-# ...existing code...
+
 processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-large-960h")
 model = Wav2Vec2ForCTC.from_pretrained("facebook/wav2vec2-large-960h").to(device)
-# ...existing code...
 
 # Load and preprocess audio
 def load_audio(file_path, target_sr=16000):
